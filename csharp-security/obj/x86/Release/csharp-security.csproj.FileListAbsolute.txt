@@ -1,0 +1,7 @@
+C:\Users\Philipp\Documents\Visual Studio 2010\Projects\csharp-security\csharp-security\bin\Release\csharp-security.exe
+C:\Users\Philipp\Documents\Visual Studio 2010\Projects\csharp-security\csharp-security\bin\Release\csharp-security.pdb
+C:\Users\Philipp\Documents\Visual Studio 2010\Projects\csharp-security\csharp-security\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Users\Philipp\Documents\Visual Studio 2010\Projects\csharp-security\csharp-security\obj\x86\Release\csharp-security.exe
+C:\Users\Philipp\Documents\Visual Studio 2010\Projects\csharp-security\csharp-security\obj\x86\Release\csharp-security.pdb
+C:\Users\Philipp\Documents\Visual Studio 2010\Projects\csharp-security\csharp-security\bin\Release\csharp-security.exe.config
+C:\Users\Philipp\Documents\Visual Studio 2010\Projects\csharp-security\csharp-security\bin\Release\PublicDomain.dll

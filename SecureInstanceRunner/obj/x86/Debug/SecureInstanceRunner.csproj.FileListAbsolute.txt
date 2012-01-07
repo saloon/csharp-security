@@ -1,0 +1,14 @@
+C:\Users\Philipp\Documents\Visual Studio 2010\Projects\SecureInstanceRunner\SecureInstanceRunner\bin\Debug\SecureInstanceRunner.exe
+C:\Users\Philipp\Documents\Visual Studio 2010\Projects\SecureInstanceRunner\SecureInstanceRunner\bin\Debug\SecureInstanceRunner.pdb
+C:\Users\Philipp\Documents\Visual Studio 2010\Projects\SecureInstanceRunner\SecureInstanceRunner\bin\Debug\csharp-security.exe
+C:\Users\Philipp\Documents\Visual Studio 2010\Projects\SecureInstanceRunner\SecureInstanceRunner\bin\Debug\csharp-security.pdb
+C:\Users\Philipp\Documents\Visual Studio 2010\Projects\SecureInstanceRunner\SecureInstanceRunner\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Philipp\Documents\Visual Studio 2010\Projects\SecureInstanceRunner\SecureInstanceRunner\obj\x86\Debug\SecureInstanceRunner.exe
+C:\Users\Philipp\Documents\Visual Studio 2010\Projects\SecureInstanceRunner\SecureInstanceRunner\obj\x86\Debug\SecureInstanceRunner.pdb
+C:\Users\Philipp\Desktop\csharp-security\SecureInstanceRunner\bin\Debug\SecureInstanceRunner.exe
+C:\Users\Philipp\Desktop\csharp-security\SecureInstanceRunner\bin\Debug\SecureInstanceRunner.pdb
+C:\Users\Philipp\Desktop\csharp-security\SecureInstanceRunner\bin\Debug\csharp-security.exe
+C:\Users\Philipp\Desktop\csharp-security\SecureInstanceRunner\bin\Debug\csharp-security.pdb
+C:\Users\Philipp\Desktop\csharp-security\SecureInstanceRunner\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Philipp\Desktop\csharp-security\SecureInstanceRunner\obj\x86\Debug\SecureInstanceRunner.exe
+C:\Users\Philipp\Desktop\csharp-security\SecureInstanceRunner\obj\x86\Debug\SecureInstanceRunner.pdb

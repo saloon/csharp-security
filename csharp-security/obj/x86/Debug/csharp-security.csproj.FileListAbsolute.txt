@@ -1,0 +1,12 @@
+C:\Users\Philipp\Documents\Visual Studio 2010\Projects\csharp-security\csharp-security\bin\Debug\csharp-security.exe
+C:\Users\Philipp\Documents\Visual Studio 2010\Projects\csharp-security\csharp-security\bin\Debug\csharp-security.pdb
+C:\Users\Philipp\Documents\Visual Studio 2010\Projects\csharp-security\csharp-security\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Philipp\Documents\Visual Studio 2010\Projects\csharp-security\csharp-security\obj\x86\Debug\csharp-security.exe
+C:\Users\Philipp\Documents\Visual Studio 2010\Projects\csharp-security\csharp-security\obj\x86\Debug\csharp-security.pdb
+C:\Users\Philipp\Documents\Visual Studio 2010\Projects\csharp-security\csharp-security\bin\Debug\csharp-security.exe.config
+C:\Users\Philipp\Desktop\csharp-security\csharp-security\bin\Debug\csharp-security.exe.config
+C:\Users\Philipp\Desktop\csharp-security\csharp-security\obj\x86\Debug\csharp-security.exe
+C:\Users\Philipp\Desktop\csharp-security\csharp-security\obj\x86\Debug\csharp-security.pdb
+C:\Users\Philipp\Desktop\csharp-security\csharp-security\bin\Debug\csharp-security.exe
+C:\Users\Philipp\Desktop\csharp-security\csharp-security\bin\Debug\csharp-security.pdb
+C:\Users\Philipp\Desktop\csharp-security\csharp-security\obj\x86\Debug\ResolveAssemblyReference.cache
