@@ -1,91 +1,80 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Security.Permissions;
-using System.Security;
-using System.Security.Policy;
 using System.IO;
 using System.Reflection;
 using System.Runtime.Remoting;
+using System.Security;
+using System.Security.Permissions;
+using System.Security.Policy;
 using System.Threading;
 using System.Xml.Serialization;
 
 namespace SecureInstanceRunner
 {
-    class SecureInstance : MarshalByRefObject
+    internal class SecureInstance : MarshalByRefObject
     {
-        private AppDomain domain;
+        private readonly long _maxMethodeTime;
+        private String _assemblyName;
+        private AppDomain _domain;
+        private bool _fail;
+        private ObjectHandle _handle;
 
-        private String path;
-        private String assemblyName;
-        private String typeName;
+        private Type _iface;
+        private String _methode;
 
-        private String methode;
-        private object[] parameters;
-
-        private Type iface;
-
-        private long maxMethodeTime;
-
-        private object o;
-        private ObjectHandle handle;
-
-
-        private bool fail = false;
-        private object r;
+        private object[] _parameters;
+        private String _path;
+        private object _r;
+        private String _typeName;
+        private object _o;
 
         public SecureInstance(String path, String assemblyName, String typeName, Type iface, long maxMethodeTime)
         {
-            this.maxMethodeTime = maxMethodeTime;
-  
-            this.Construct(path, assemblyName, typeName, iface);
-        }
+            _maxMethodeTime = maxMethodeTime;
 
+            Construct(path, assemblyName, typeName, iface);
+        }
 
 
         private void Construct(String path, String assemblyName, String typeName, Type iface)
         {
+            _path = Path.GetFullPath(path);
+            _assemblyName = assemblyName;
+            _typeName = typeName;
+            _iface = iface;
 
-            this.path = Path.GetFullPath(path);
-            this.assemblyName = assemblyName;
-            this.typeName = typeName;
-            this.iface = iface;
 
+            CreateAppDomain();
 
-            this.CreateAppDomain();
-
-            Thread t = new Thread(this.ProcessConstructor);
+            var t = new Thread(ProcessConstructor);
 
             t.Start();
-            t.Join((int)this.maxMethodeTime);
+            t.Join((int) _maxMethodeTime);
 
-            if (t.IsAlive || this.fail)
+            if (t.IsAlive || _fail)
             {
                 t.Abort();
                 throw new SecurityException("Thread timed out");
             }
 
 
-            if (this.handle != null)
+            if (_handle != null)
             {
-                this.o = this.handle.Unwrap();
+                _o = _handle.Unwrap();
             }
         }
 
 
         public string CallMethod(String methode, object[] parameters)
         {
+            _methode = methode;
+            _parameters = parameters;
 
-            this.methode = methode;
-            this.parameters = parameters;
-
-            Thread t = new Thread(this.ProcessMethod);
+            var t = new Thread(ProcessMethod);
 
             t.Start();
-            t.Join((int) this.maxMethodeTime);
+            t.Join((int) _maxMethodeTime);
 
-            if (t.IsAlive || this.fail)
+            if (t.IsAlive || _fail)
             {
                 while (t.IsAlive)
                 {
@@ -98,9 +87,9 @@ namespace SecureInstanceRunner
             }
 
             string r = "NULL";
-            if(this.r != null)
+            if (_r != null)
             {
-                r = this.SerializeToString(this.r);
+                r = SerializeToString(_r);
             }
 
             return r;
@@ -110,11 +99,11 @@ namespace SecureInstanceRunner
         {
             try
             {
-                this.r = this.iface.InvokeMember(this.methode, BindingFlags.InvokeMethod, Type.DefaultBinder, this.o, this.parameters);
+                _r = _iface.InvokeMember(_methode, BindingFlags.InvokeMethod, Type.DefaultBinder, _o, _parameters);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                this.fail = true;
+                _fail = true;
             }
         }
 
@@ -122,39 +111,37 @@ namespace SecureInstanceRunner
         {
             try
             {
-                this.handle = this.domain.CreateInstanceFrom(this.path + @"\" + this.assemblyName + @".dll", this.typeName);
+                _handle = _domain.CreateInstanceFrom(_path + @"\" + _assemblyName + @".dll", _typeName);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                this.fail = true;
+                _fail = true;
             }
         }
 
         private void CreateAppDomain()
         {
-            PermissionSet set = new PermissionSet(PermissionState.None);
+            var set = new PermissionSet(PermissionState.None);
             set.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
             set.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read |
                                                    FileIOPermissionAccess.PathDiscovery,
-                                                   this.path));
+                                                   _path));
 
-            AppDomainSetup info = new AppDomainSetup { ApplicationBase = this.path };
+            var info = new AppDomainSetup {ApplicationBase = _path};
 
             // StrongName fullTrustAssembly = typeof(SecureInstance).Assembly.Evidence.GetHostEvidence<StrongName>();
-            StrongName fullTrustAssembly = this.GetType().Assembly.Evidence.GetHostEvidence<StrongName>();
+            GetType().Assembly.Evidence.GetHostEvidence<StrongName>();
 
             //Console.WriteLine(this.GetType().Assembly.Evidence.GetHostEvidence<StrongName>());
 
-            this.domain = AppDomain.CreateDomain("Sandbox", null, info, set, null);
-
-
+            _domain = AppDomain.CreateDomain("Sandbox", null, info, set, null);
         }
 
         public string SerializeToString(object obj)
         {
-            XmlSerializer serializer = new XmlSerializer(obj.GetType());
+            var serializer = new XmlSerializer(obj.GetType());
 
-            using (StringWriter writer = new StringWriter())
+            using (var writer = new StringWriter())
             {
                 serializer.Serialize(writer, obj);
 
@@ -164,13 +151,12 @@ namespace SecureInstanceRunner
 
         public T SerializeFromString<T>(string xml)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(T));
+            var serializer = new XmlSerializer(typeof (T));
 
-            using (StringReader reader = new StringReader(xml))
+            using (var reader = new StringReader(xml))
             {
-                return (T)serializer.Deserialize(reader);
+                return (T) serializer.Deserialize(reader);
             }
         }
-
     }
 }
